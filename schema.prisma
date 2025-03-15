@@ -1,0 +1,27 @@
+// schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://jamessungarda@localhost:5432/ssungarda?schema=public" // uses connection pooling
+}
+
+model Flashcard {
+  id        String   @id @default(uuid())
+  question  String
+  next_date DateTime
+
+  choices Choices[] @relation(name: "answer_choices")
+}
+
+model Choices {
+  id           String  @id @default(uuid())
+  choice       String
+  is_correct   Boolean
+  flashcard_id String
+
+  flashcard Flashcard @relation(fields: [flashcard_id], references: [id], name: "answer_choices")
+}
