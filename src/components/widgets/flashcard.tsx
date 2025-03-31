@@ -3,7 +3,7 @@
 import {
   Card,
   CardContent,
-  CardDescription,
+  // CardDescription, // TODO: Implement CardDescription
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -32,11 +32,12 @@ const Flashcard = ({ flashcard }: { flashcard: FlashcardWithChoices }) => {
 
   const form = useForm();
 
-  const {
-    data: updateDateRes,
-    error: updateDateErr,
-    isLoading: updateDateLoading,
-  } = useSWR(shouldUpdateDate ? `/api/flashcards/answer` : null, (url) =>
+  // const {
+  //   data: updateDateRes,
+  //   error: updateDateErr,
+  //   isLoading: updateDateLoading,
+  // } = useSWR(shouldUpdateDate ? `/api/flashcards/answer` : null, (url) =>
+  useSWR(shouldUpdateDate ? `/api/flashcards/answer` : null, (url) =>
     fetch(url, {
       method: "POST",
       body: JSON.stringify({
